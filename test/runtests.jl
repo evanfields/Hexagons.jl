@@ -18,8 +18,7 @@ function run_point_test(x, y)
     @test isapprox(hex_center[2], mean_vert_y; atol = 1e-6)
     # a string of type conversions should recover hex_cubic
     hex_axial = convert(HexagonAxial, hex_cubic)
-    hex_offset = convert(HexagonOffsetOddR, hex_axial)
-    other_hex_cubic = convert(HexagonCubic, hex_offset)
+    other_hex_cubic = convert(HexagonCubic, hex_axial)
     @test other_hex_cubic == hex_cubic
 end
     

@@ -2,8 +2,8 @@ module Hexagons
 
 import Base: convert, length, collect, iterate
 
-export HexagonAxial, HexagonCubic, HexagonOffsetOddR, HexagonOffsetEvenR,
-       hexagon, center, hexpoints, cube_round, cube_linedraw, neighbor,
+export HexagonAxial, HexagonCubic,
+       center, hexpoints, cube_round, cube_linedraw, neighbor,
        HexagonVertexIterator, vertices,
        HexagonNeighborIterator, neighbors,
        HexagonDiagonalIterator, diagonals,
@@ -28,24 +28,6 @@ struct HexagonCubic <: Hexagon
     z::Int
 end
 
-struct HexagonOffsetOddR <: Hexagon
-    q::Int
-    r::Int
-end
-
-struct HexagonOffsetEvenR <: Hexagon
-    q::Int
-    r::Int
-end
-
-
-# Basic constructors
-# ------------------
-
-hexagon(x::Int, y::Int, z::Int) = HexagonCubic(x, y, z)
-hexagon(q::Int, r::Int) = HexagonAxial(q, r)
-
-
 # Convert between hexagon indexing
 # --------------------------------
 
@@ -53,52 +35,9 @@ function convert(::Type{HexagonAxial}, hex::HexagonCubic)
     HexagonAxial(hex.x, hex.z)
 end
 
-function convert(::Type{HexagonAxial}, hex::HexagonOffsetOddR)
-    convert(HexagonAxial, convert(HexagonCubic, hex))
-end
-
-function convert(::Type{HexagonAxial}, hex::HexagonOffsetEvenR)
-    convert(HexagonAxial, convert(HexagonCubic, hex))
-end
-
 function convert(::Type{HexagonCubic}, hex::HexagonAxial)
     HexagonCubic(hex.q, -hex.q - hex.r, hex.r)
 end
-
-function convert(::Type{HexagonCubic}, hex::HexagonOffsetOddR)
-    x = hex.q - (hex.r >> 1)
-    z = hex.r
-    y = -x - z
-    HexagonCubic(x, y, z)
-end
-
-function convert(::Type{HexagonCubic}, hex::HexagonOffsetEvenR)
-    x = hex.q - (hex.r >> 1) + int(isodd(hex.r))
-    z = hex.r
-    y = -x - z
-    HexagonCubic(x, y, z)
-end
-
-function convert(::Type{HexagonOffsetOddR}, hex::HexagonCubic)
-    q = hex.x + (hex.z >> 1)
-    r = hex.z
-    HexagonOffsetOddR(q, r)
-end
-
-function convert(::Type{HexagonOffsetOddR}, hex::HexagonAxial)
-    convert(HexagonOffsetOddR, convert(HexagonCubic, hex))
-end
-
-function convert(::Type{HexagonOffsetEvenR}, hex::HexagonCubic)
-    q = hex.x + (hex.z >> 1) + int(isodd(hex.z))
-    r = hex.z
-    HexagonOffsetEvenR(q, r)
-end
-
-function convert(::Type{HexagonOffsetEvenR}, hex::HexagonAxial)
-    convert(HexagonOffsetEvenR, convert(HexagonCubic, hex))
-end
-
 
 # Neighbor hexagon iterator
 # -------------------------
@@ -209,7 +148,7 @@ struct HexagonDistanceIterator
     n::Int
 end
 
-function hexagons_within(n::Int, hex::Hexagon = hexagon(0, 0))
+function hexagons_within(n::Int, hex::Hexagon = HexagonAxial(0, 0))
     cubic_hex = convert(HexagonCubic, hex)
     HexagonDistanceIterator(hex, n)
 end
@@ -241,7 +180,7 @@ struct HexagonRingIterator
     n::Int
 end
 
-function ring(n::Int, hex::Hexagon = hexagon(0, 0))
+function ring(n::Int, hex::Hexagon = HexagonAxial(0, 0))
     # println("New hexring with center $hex and n $n")
     cubic_hex = convert(HexagonCubic, hex)
     HexagonRingIterator(cubic_hex, n)
@@ -277,7 +216,7 @@ struct HexagonSpiralIteratorState
     hexring_it_hex::HexagonCubic
 end
 
-function spiral(n::Int, hex::Hexagon = hexagon(0, 0))
+function spiral(n::Int, hex::Hexagon = HexagonAxial(0, 0))
     cubic_hex = convert(HexagonCubic, hex)
     HexagonSpiralIterator(cubic_hex, n)
 end
