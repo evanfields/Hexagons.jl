@@ -1,8 +1,8 @@
 
 # Hexagons
 
-[![Build
-Status](https://travis-ci.org/GiovineItalia/Hexagons.jl.svg?branch=master)](https://travis-ci.org/GiovineItalia/Hexagons.jl)
+[![Build Status](https://github.com/evanfields/Hexagons.jl/workflows/CI/badge.svg)](https://github.com/evanfields/Hexagons.jl/actions?query=workflow%3ACI+branch%3Amaster)
+
 
 This package provides some basic utilities for working with hexagonal grids. It
 is largely works from Amit Patel's [terrific
