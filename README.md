@@ -9,6 +9,7 @@ I forked [GiovineItalia's Hexagons.jl](https://github.com/GiovineItalia/Hexagons
 * The previous Hexagons.jl repository doesn't seem fully maintained, at least as of this writing;
 * The previous Hexagons.jl package only supports pointy-top hexagons, while I usually find flat-topped more visually appealing;
 * The previous package supports offset coordinates, which I do not want to support!
+
 Both this fork and the original Hexagons.jl are largely derived from Amit Patel's [terrific
 refererence](http://www.redblobgames.com/grids/hexagons/).
 
