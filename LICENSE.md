@@ -1,6 +1,7 @@
 Hexagons is licensed under the MIT License:
 
 > Copyright (c) 2013: Daniel C. Jones
+>
 > Copyright (c) 2020: Evan Fields
 >
 > Permission is hereby granted, free of charge, to any person obtaining
