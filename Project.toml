@@ -2,7 +2,7 @@ name = "Hexagons"
 uuid = "a1b4810d-1bce-5fbd-ac56-80944d57a21f"
 
 [compat]
-julia = "0.7, 1"
+julia = "1"
 
 [extras]
 Random = "9a3f8284-a2c9-5f02-9a11-845980a1fd5c"
